@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MChess.Views.ChessPage"
+             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             android:TabbedPage.ToolbarPlacement="Bottom"
+             BarBackgroundColor="#191970"
+             SelectedTabColor="#1E90FF"
+             UnselectedTabColor="White"
+             BarTextColor="Orange"
+             NavigationPage.HasNavigationBar="False">
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarColor="DodgerBlue"/>
+    </Page.Behaviors>
+    <ContentPage Title="Game" BackgroundColor="#272727" IconImageSource="outline_people_black_24.png" x:Name="content" Padding="-10" NavigationPage.HasNavigationBar="False">
+        <ContentPage.Content>
+            <AbsoluteLayout x:Name="board">
+                <Image Source="background.jpg" Aspect="Fill" x:Name="imgBackground" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0.5, 0.5, 1, 1"/>
+                <AbsoluteLayout x:Name="absolute" WidthRequest="320" HeightRequest="400" BackgroundColor="#30FFFFFF" HorizontalOptions="Center" VerticalOptions="Center" Padding="10" AbsoluteLayout.LayoutBounds="0.5, 0.5" AbsoluteLayout.LayoutFlags="PositionProportional">
+                    <Grid ColumnSpacing="0" RowSpacing="0" AbsoluteLayout.LayoutBounds="0.5, 0.5, 320, 400" AbsoluteLayout.LayoutFlags="PositionProportional" x:Name="grid" Margin="0" Padding="0, 0, 0, 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <BoxView BackgroundColor="Black" Margin="2, 0, 2, 4" CornerRadius="7" Grid.Row="0" Grid.Column="1" WidthRequest="36" HeightRequest="36" x:Name="BlackIcon"/>
+                        <BoxView BackgroundColor="White" Margin="2, 4, 2, 0" CornerRadius="7" Grid.Row="9" Grid.Column="1" WidthRequest="36" HeightRequest="36" x:Name="WhiteIcon"/>
+                        <Label TextColor="White" Grid.Row="0" Grid.Column="2" Text="Guest (400)" Grid.ColumnSpan="4" FontAttributes="Bold" Margin="5, 0, 0, 0" x:Name="BlackName" LineBreakMode="CharacterWrap" WidthRequest="155" HeightRequest="40"/>
+                        <Label TextColor="White" Grid.Row="9" Grid.Column="2" Text="Guest (400)" Grid.ColumnSpan="4" FontAttributes="Bold" Margin="5, 5, 0, 0" x:Name="WhiteName" LineBreakMode="CharacterWrap" WidthRequest="155" HeightRequest="35"/>
+                        <Label Text="3:00" IsEnabled="False" Grid.Column="7" Grid.Row="0" BackgroundColor="LightGray" Grid.ColumnSpan="2" Margin="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="20" FontAttributes="Bold" x:Name="timeBlack" WidthRequest="74" HeightRequest="34"/>
+                        <Label Text="3:00" IsEnabled="False" Grid.Column="7" Grid.Row="9" BackgroundColor="LightGray" Grid.ColumnSpan="2" Margin="3" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="20" FontAttributes="Bold" x:Name="timeWhite" WidthRequest="74" HeightRequest="34"/>
+                    </Grid>
+                </AbsoluteLayout>
+                <ImageButton Source="start.png" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="0.95, 0.95, 70, 70" Clicked="StartMatch" x:Name="Start" CornerRadius="50" BackgroundColor="Transparent"/>
+            </AbsoluteLayout>
+        </ContentPage.Content>
+    </ContentPage>
+    <ContentPage Title="Settings" IconImageSource="outline_settings_black_24.png" BackgroundColor="#272727" NavigationPage.HasNavigationBar="False">
+        <ScrollView>
+            <StackLayout Margin="20" x:Name="hmm">
+                <Label Text="About this app:" FontAttributes="Bold" FontSize="20" TextColor="AntiqueWhite" FontFamily="Lexend"/>
+                <Image Source="chesslogo.png" HeightRequest="100" Aspect="AspectFit" x:Name="chessLogo"/>
+                <Label Text="MChess [Mobile]" FontAttributes="Bold" FontSize="20" TextColor="White" HorizontalTextAlignment="Center"/>
+                <Label Text="Version: 2.0 Beta" FontAttributes="Bold" TextColor="AntiqueWhite"/>
+                <Label Text="Latest update: January 5, 2023" FontAttributes="Bold" TextColor="AntiqueWhite"/>
+                <Label Text="Supported/recommended operating systems: Android 6.0 Marshmallow or newer, iOS 15 or newer"  TextColor="AntiqueWhite"/>
+                <Label Text="©2022 - 2023 MH Corporation. All rights reserved." FontAttributes="Bold" TextColor="AntiqueWhite"/>
+                <Button Text="Time" Clicked="TimeButton_Clicked" BackgroundColor="#4682B4" TextColor="Gold" FontAttributes="Bold" CornerRadius="10" Margin="0, 10, 0, 0" TextTransform="Uppercase"/>
+                <Button Text="Players" Clicked="PlayerButton_Clicked" BackgroundColor="#4682B4" TextColor="Gold" FontAttributes="Bold" CornerRadius="10" TextTransform="Uppercase"/>
+                <BoxView HeightRequest="1" BackgroundColor="Gray" Margin="0, 10, 0, 10"/>
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                    <Switch x:Name="switchTap"/>
+                    <Label Text="Rotate the chessboard after each move" VerticalOptions="Center" TextColor="White" FontAttributes="Bold">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ChangeSwitchState"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                </StackLayout>
+                <BoxView HeightRequest="1" BackgroundColor="Gray" Margin="0, 10, 0, 0"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage>
+</TabbedPage>
